@@ -1,6 +1,17 @@
 /* 社福連ネット 法人向け 空き状況の更新ページ（案C）
    ロジックは renkei-mypage-mock-v5.html（凍結モック）から移植。
-   更新対象のサービス行は data/facilities.json の update 配列から生成する。 */
+   更新対象のサービス行は、ログイン中なら data/koushin/<houjinId>.json、
+   未ログインなら data/facilities.json の update 配列（既定のダミー）から生成する。
+   ※直接アクセス時にログインを強制しないのはデモの直リンクを優先しているため。
+     本番実装時に再検討する（docs/handoff.md の未決事項）。 */
+
+const SESSION_KEY = 'shafukuren.houjin';
+function getLoginedHoujin(){
+  try{
+    const raw = sessionStorage.getItem(SESSION_KEY);
+    return raw ? JSON.parse(raw) : null;
+  }catch(e){ return null; }
+}
 
 /* ========== 画面切替（案A・案Bは企業向けページへ） ========== */
 function setView(v){
@@ -82,6 +93,29 @@ function doUpdate(luId){
 
 /* ========== データ読み込みと初期化 ========== */
 (async function init(){
-  const fac = await fetch('data/facilities.json').then(r=>r.json());
-  buildRows(fac.update);
+  const h = getLoginedHoujin();
+  let rows = null;
+
+  if(h){
+    /* ログイン中: その法人の更新行を読む */
+    try{
+      const d = await fetch('data/koushin/' + encodeURIComponent(h.houjinId) + '.json').then(r=>{
+        if(!r.ok) throw new Error('not found');
+        return r.json();
+      });
+      rows = d.rows;
+    }catch(e){ rows = null; }   /* 用意がなければ既定のダミーに戻す */
+
+    /* ログインバーの法人名と、法人ページへ戻る導線 */
+    const bar = document.querySelector('.loginbar.houjin span');
+    if(bar) bar.textContent = h.name + ' さま（登録法人用）';
+    const back = document.getElementById('backtotop');
+    if(back) back.classList.add('show');
+  }
+
+  if(!rows){
+    const fac = await fetch('data/facilities.json').then(r=>r.json());
+    rows = fac.update;
+  }
+  buildRows(rows);
 })();

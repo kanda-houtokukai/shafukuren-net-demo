@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>社福連ネット｜法人ログイン</title>
+<link rel="stylesheet" href="css/renkei.css">
+<link rel="stylesheet" href="css/trial.css">
+<link rel="stylesheet" href="css/login.css">
+</head>
+<body>
+
+<div class="trialband">これは試作（デモ）です。掲載している法人名・施設名・空き状況・電話番号はすべて架空のものです。本番では登録いただいた企業・法人のみがログインして利用します。</div>
+
+<header>
+  <div class="sitehead">
+    <div class="brand">
+      <div class="mark">
+        <svg viewBox="0 0 24 24" fill="none"><path d="M4 11.5 12 5l8 6.5" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M6.5 10.5V19h11v-8.5" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M12 19v-4" stroke="#fff" stroke-width="2" stroke-linecap="round"/></svg>
+      </div>
+      <div>
+        <span class="name">社福連ネット</span>
+        <span class="sub">福智町社会福祉法人連携協議会（サービス名は仮）</span>
+      </div>
+    </div>
+  </div>
+</header>
+
+<div class="authwrap">
+  <div class="authcard">
+    <h1>法人ログイン</h1>
+    <p class="authlead">協議会に加入する法人の方の専用ページです。ログインすると、空き状況の更新と、掲載内容の確認ができます。</p>
+
+    <form id="loginForm" novalidate>
+      <div class="field">
+        <label for="loginId">法人ID<span class="hint">メールアドレスでも入れます</span></label>
+        <input type="text" id="loginId" name="loginId" autocomplete="username" autocapitalize="none" spellcheck="false">
+      </div>
+      <div class="field">
+        <label for="password">パスワード</label>
+        <input type="password" id="password" name="password" autocomplete="current-password">
+      </div>
+      <p class="autherr" id="err"></p>
+      <button class="btn authbtn" type="submit">ログイン</button>
+    </form>
+
+    <a class="forgot" href="#">パスワードをお忘れの方</a>
+
+    <div class="demohint">
+      <h2><span class="pill">デモ用</span>入力例</h2>
+      <p>この試作には本物の認証は入っていません。下のどちらかを入力すると、その法人のページに進みます。</p>
+      <div class="demolist" id="demoList"></div>
+    </div>
+  </div>
+
+  <p class="backlink"><a href="kigyo.html">← 企業向けページに戻る</a></p>
+</div>
+
+<footer>
+  <div class="inner">
+    <span class="fname">社福連ネット（サービス名は仮）｜福智町社会福祉法人連携協議会</span>
+    <span>このログイン画面は試作です。実際の認証方式（ログインの仕組み・パスワードの管理）は未定で、まだ実装していません。</span>
+  </div>
+</footer>
+
+<script src="js/login.js"></script>
+</body>
+</html>

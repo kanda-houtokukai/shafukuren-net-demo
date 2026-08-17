@@ -1,0 +1,36 @@
+{
+  "houjinId": "test-fukushikai",
+  "houjin": "社会福祉法人 テスト福祉会",
+  "rows": [
+    {
+      "id": "test-tokuyo-mori",
+      "facility": "特別養護老人ホーム テストの森",
+      "cat": "elder",
+      "service": "短期入所（ショートステイ）",
+      "type": "短期間の宿泊介護",
+      "updatedAt": "2026-08-16",
+      "value": 2,
+      "unit": "残り室数"
+    },
+    {
+      "id": "test-day-sukoyaka",
+      "facility": "デイサービスセンターすこやか",
+      "cat": "elder",
+      "service": "通所介護（デイサービス）",
+      "type": "日帰りで通う介護",
+      "updatedAt": "2026-08-15",
+      "value": 5,
+      "unit": "残り枠"
+    },
+    {
+      "id": "test-homon",
+      "facility": "テスト福祉会ヘルパーステーション",
+      "cat": "elder",
+      "service": "訪問介護（ホームヘルプ）",
+      "type": "自宅に来てもらう介護",
+      "updatedAt": "2026-06-28",
+      "value": 1,
+      "unit": "残り枠"
+    }
+  ]
+}

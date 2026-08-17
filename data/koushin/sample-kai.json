@@ -1,0 +1,46 @@
+{
+  "houjinId": "sample-kai",
+  "houjin": "社会福祉法人 サンプル会",
+  "rows": [
+    {
+      "id": "gh-hinata",
+      "facility": "グループホームひなた",
+      "cat": "elder",
+      "service": "認知症対応型共同生活介護（グループホーム）",
+      "type": "認知症の方が少人数で暮らす住まい",
+      "updatedAt": "2026-08-16",
+      "value": 1,
+      "unit": "残り室数"
+    },
+    {
+      "id": "sample-no-oka",
+      "facility": "障がい者支援施設 サンプルの丘",
+      "cat": "adult",
+      "service": "生活介護",
+      "type": "日中の活動と介護の場",
+      "updatedAt": "2026-08-15",
+      "value": 3,
+      "unit": "残り枠"
+    },
+    {
+      "id": "work-center-sample",
+      "facility": "ワークセンターサンプル",
+      "cat": "adult",
+      "service": "就労継続支援B型",
+      "type": "自分のペースで働く場",
+      "updatedAt": "2026-07-02",
+      "value": 2,
+      "unit": "残り枠"
+    },
+    {
+      "id": "hoshizora-center",
+      "facility": "児童発達支援センター ほしぞら",
+      "cat": "kids",
+      "service": "児童発達支援",
+      "type": "未就学のお子さんの療育",
+      "updatedAt": "2026-08-14",
+      "value": 0,
+      "unit": "残り枠"
+    }
+  ]
+}

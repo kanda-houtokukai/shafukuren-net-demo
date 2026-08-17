@@ -1,5 +1,9 @@
-/* 試作（デモ）であることを示す帯。全ページ共通・常時表示・閉じるボタンなし。
-   モックから抽出した renkei.css / kakunin.css には手を入れず、このファイルだけで完結させる。 */
+/* 凍結モックのあとに足したものをまとめるファイル。
+   モックから抽出した renkei.css / kakunin.css には手を入れず、追加分はここに書く。
+   ①試作（デモ）であることを示す帯（全ページ共通・常時表示・閉じるボタンなし）
+   ②企業向けページに置く法人ログインへの導線（控えめな扱い） */
+
+/* ===== ①試作帯 ===== */
 .trialband{
   background:#fff3c9;
   color:#8a6a20;
@@ -11,3 +15,37 @@
 @media(max-width:780px){
   .trialband{text-align:left; font-size:12px;}
 }
+
+/* ===== ②法人ログインへの導線（企業の利用者の邪魔をしない控えめな扱い） ===== */
+nav.gnav a.houjinlink{
+  font-size:12.5px;
+  color:var(--ink-soft);
+  margin-left:8px;
+  padding-left:19px;
+  border-left:1px solid #e2dfd5;
+  border-radius:0;
+}
+nav.gnav a.houjinlink:hover{
+  background:none;
+  color:var(--primary-deep);
+  text-decoration:underline;
+}
+footer .inner .footlogin{margin-top:6px;}
+footer .inner .footlogin a{font-size:12px;}
+
+@media(max-width:780px){
+  nav.gnav a.houjinlink{
+    margin-left:0; padding-left:15px; border-left:none;
+  }
+}
+
+/* ===== ③法人向け2画面から法人トップへ戻る導線（ログイン中のみ表示） ===== */
+.backtotop{
+  display:none;              /* 既定は非表示。ログイン中だけJSが表示する */
+  margin:18px 0 -8px;
+  font-size:12.5px;
+  color:var(--ink-soft);
+  text-decoration:none;
+}
+.backtotop.show{display:inline-block;}
+.backtotop:hover{color:var(--primary-deep); text-decoration:underline;}

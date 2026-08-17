@@ -111,6 +111,14 @@ function cardHtml(card, n, cat){
   const houjinId = /^[a-z0-9-]+$/.test(param) ? param : 'sample-kai';
   const D = await fetch('data/kakunin/' + houjinId + '.json').then(r=>r.json());
 
+  /* ログイン中なら法人ページへ戻る導線を出す */
+  try{
+    if(sessionStorage.getItem('shafukuren.houjin')){
+      const back = document.getElementById('backtotop');
+      if(back) back.classList.add('show');
+    }
+  }catch(e){ /* sessionStorage が使えない環境では出さない */ }
+
   document.title = '社福連ネット｜掲載内容の確認（' + D.houjin.replace(/\s+/g, '') + 'さま）';
   document.getElementById('lbName').textContent = D.houjin + ' さま（登録法人用）';
   document.getElementById('estimate').textContent = D.estimate;

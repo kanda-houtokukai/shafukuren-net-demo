@@ -1,0 +1,19 @@
+{
+  "note": "デモ用のログイン情報。本物の認証ではなく、画面のつながりを見せるための仮の仕組みです。パスワードはログイン画面にも表示しています。本番では別の方式（未定）に置き換えます。",
+  "accounts": [
+    {
+      "houjinId": "sample-kai",
+      "name": "社会福祉法人 サンプル会",
+      "loginId": "sample-kai",
+      "email": "sample-kai@example.com",
+      "demoPassword": "demo1234"
+    },
+    {
+      "houjinId": "test-fukushikai",
+      "name": "社会福祉法人 テスト福祉会",
+      "loginId": "test-fukushikai",
+      "email": "test-fukushikai@example.com",
+      "demoPassword": "demo1234"
+    }
+  ]
+}

@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>社福連ネット｜法人ページ</title>
+<link rel="stylesheet" href="css/renkei.css">
+<link rel="stylesheet" href="css/trial.css">
+<link rel="stylesheet" href="css/login.css">
+</head>
+<body>
+
+<div class="trialband">これは試作（デモ）です。掲載している法人名・施設名・空き状況・電話番号はすべて架空のものです。本番では登録いただいた企業・法人のみがログインして利用します。</div>
+
+<header>
+  <div class="sitehead">
+    <div class="brand">
+      <div class="mark">
+        <svg viewBox="0 0 24 24" fill="none"><path d="M4 11.5 12 5l8 6.5" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M6.5 10.5V19h11v-8.5" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M12 19v-4" stroke="#fff" stroke-width="2" stroke-linecap="round"/></svg>
+      </div>
+      <div>
+        <span class="name">社福連ネット</span>
+        <span class="sub">福智町社会福祉法人連携協議会（サービス名は仮）</span>
+      </div>
+    </div>
+  </div>
+</header>
+
+<div class="wrap">
+  <div class="houjinbar">
+    <span class="who" id="who">—<small>としてログイン中</small></span>
+    <button class="logout" id="logout">ログアウト</button>
+  </div>
+
+  <section class="tophead">
+    <h1>法人ページ</h1>
+    <p>加入法人の方の入口です。ふだんお使いいただくのは「空き状況の更新」です。掲載内容の確認は、はじめてご登録いただくときと、内容を見直すときにお使いください。</p>
+  </section>
+
+  <div class="menugrid">
+    <a class="menucard" id="cardUpdate" href="houjin.html" style="--mc:var(--primary); --mcs:var(--primary-soft)">
+      <span class="mi">
+        <svg viewBox="0 0 24 24" fill="none"><path d="M12 5v14M5 12h14" stroke="#1f7f70" stroke-width="2" stroke-linecap="round"/></svg>
+      </span>
+      <span class="mt">空き状況の更新</span>
+      <span class="md">受け入れできる残り枠の数を更新します。変わっていないときも「変化なし」を押していただくと、更新日が新しくなります。</span>
+      <span class="mgo">更新する →</span>
+    </a>
+
+    <a class="menucard" id="cardKakunin" href="kakunin.html" style="--mc:var(--kids); --mcs:var(--kids-soft)">
+      <span class="mi">
+        <svg viewBox="0 0 24 24" fill="none"><rect x="4.5" y="3.5" width="15" height="17" rx="2.5" stroke="#f09a4a" stroke-width="1.8"/><path d="M8.5 10.5l2.5 2.5 4.5-4.5" stroke="#f09a4a" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><path d="M8.5 16h7" stroke="#f09a4a" stroke-width="1.8" stroke-linecap="round"/></svg>
+      </span>
+      <span class="mt">掲載内容の確認</span>
+      <span class="md">公開情報をもとにAIが作成した下書きをご確認いただきます。間違いを直し、「この内容で確定」を押していただくと掲載されます。</span>
+      <span class="mgo">確認する →</span>
+    </a>
+  </div>
+</div>
+
+<footer>
+  <div class="inner">
+    <span class="fname">社福連ネット（サービス名は仮）｜福智町社会福祉法人連携協議会</span>
+    <span>この法人ページは試作です。実際の認証方式（ログインの仕組み・パスワードの管理）は未定で、まだ実装していません。</span>
+  </div>
+</footer>
+
+<script src="js/houjin-top.js"></script>
+</body>
+</html>

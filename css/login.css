@@ -1,0 +1,97 @@
+/* 法人ログイン画面（login.html）と法人トップ（houjin-top.html）のスタイル。
+   配色・角丸・影・書体は renkei.css の :root 変数と .btn をそのまま使う。
+   モックから抽出した renkei.css / kakunin.css には手を入れない。 */
+
+/* ===== 共通 ===== */
+.authwrap{max-width:520px; margin:0 auto; padding:8px 22px 60px;}
+.authcard{
+  background:#fff; border-radius:22px; box-shadow:var(--shadow);
+  padding:32px 30px 26px; margin-top:18px;
+}
+.authcard h1{font-size:22px; font-weight:800; line-height:1.5;}
+.authlead{font-size:13.5px; color:var(--ink-soft); margin-top:8px;}
+
+.field{margin-top:20px;}
+.field label{display:block; font-size:13px; font-weight:bold; margin-bottom:6px;}
+.field .hint{font-weight:normal; color:var(--ink-soft); font-size:12px; margin-left:6px;}
+.field input{
+  width:100%; font-family:inherit; font-size:16px; color:var(--ink);
+  background:#fdfcf9; border:1.5px solid #e2dfd5; border-radius:12px;
+  padding:12px 14px; outline:none;
+}
+.field input:focus{border-color:var(--primary); background:#fff;}
+
+.autherr{
+  display:none; margin-top:16px; font-size:13px; font-weight:bold; color:#c0553a;
+  background:var(--warn-soft,#fbeae5); border-radius:12px; padding:10px 14px;
+}
+.autherr.show{display:block;}
+
+.authbtn{width:100%; margin-top:22px; padding:14px; font-size:15.5px;}
+.forgot{display:block; text-align:center; font-size:13px; margin-top:16px;}
+
+.demohint{
+  margin-top:26px; padding-top:22px; border-top:1px dashed #e8e5dc;
+}
+.demohint h2{font-size:13.5px; font-weight:800; display:flex; align-items:center; gap:8px;}
+.demohint h2 .pill{
+  font-size:11px; font-weight:bold; color:#8a6a20;
+  background:var(--marker); border-radius:999px; padding:2px 10px;
+}
+.demohint p{font-size:12.5px; color:var(--ink-soft); margin-top:6px;}
+.demolist{margin-top:12px; display:flex; flex-direction:column; gap:8px;}
+.demolist .row{
+  background:#f4f2ec; border-radius:12px; padding:10px 14px;
+  font-size:13px; display:flex; gap:10px; align-items:baseline; flex-wrap:wrap;
+}
+.demolist .row .nm{font-weight:bold; flex:1 1 100%;}
+.demolist .row code{
+  font-family:"SF Mono","Menlo",monospace; font-size:12.5px;
+  background:#fff; border-radius:7px; padding:2px 9px;
+}
+.demolist .row .k{font-size:11.5px; color:var(--ink-soft);}
+
+.backlink{text-align:center; margin-top:22px; font-size:13px;}
+
+/* ===== 法人トップ ===== */
+.houjinbar{
+  background:#fdf0dd; color:#9a6a1f; border-radius:16px;
+  padding:14px 20px; margin:22px 0 0;
+  display:flex; align-items:center; justify-content:space-between; gap:12px; flex-wrap:wrap;
+}
+.houjinbar .who{font-size:14px; font-weight:800;}
+.houjinbar .who small{display:block; font-size:11.5px; font-weight:normal; margin-top:1px;}
+.houjinbar .logout{
+  border:1.5px solid #e0c9a3; background:#fff; color:#9a6a1f;
+  border-radius:999px; padding:8px 18px; font-size:13px; font-weight:bold; cursor:pointer;
+}
+
+.tophead{padding:26px 0 0;}
+.tophead h1{font-size:23px; font-weight:800;}
+.tophead p{color:var(--ink-soft); font-size:13.5px; margin-top:6px; max-width:680px;}
+
+.menugrid{display:grid; grid-template-columns:repeat(2,1fr); gap:18px; margin:26px 0 50px;}
+.menucard{
+  background:#fff; border-radius:22px; box-shadow:var(--shadow);
+  padding:26px 24px 22px; text-decoration:none; color:var(--ink);
+  display:flex; flex-direction:column; gap:8px; min-height:190px;
+  border-top:5px solid var(--mc,var(--primary)); transition:transform .16s ease, box-shadow .16s ease;
+}
+.menucard:hover{transform:translateY(-4px); box-shadow:0 14px 30px rgba(80,90,85,.16);}
+.menucard .mi{
+  width:52px; height:52px; border-radius:16px; background:var(--mcs,var(--primary-soft));
+  display:flex; align-items:center; justify-content:center; margin-bottom:4px;
+}
+.menucard .mi svg{width:26px; height:26px;}
+.menucard .mt{font-size:17px; font-weight:800; line-height:1.45;}
+.menucard .md{font-size:12.5px; color:var(--ink-soft); line-height:1.7;}
+.menucard .mgo{
+  margin-top:auto; align-self:flex-start; font-size:13px; font-weight:bold;
+  color:var(--primary-deep); background:var(--primary-soft);
+  border-radius:999px; padding:6px 16px;
+}
+
+@media(max-width:780px){
+  .menugrid{grid-template-columns:1fr;}
+  .authcard{padding:26px 22px 22px;}
+}
