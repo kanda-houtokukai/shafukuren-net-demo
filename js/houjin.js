@@ -13,7 +13,10 @@ function getLoginedHoujin(){
   }catch(e){ return null; }
 }
 
-/* ========== 画面切替（案A・案Bは企業向けページへ） ========== */
+/* ========== 企業向けページへの遷移 ==========
+   開発用の黒いバー（.mocktool）を外したため、いま呼ぶのは
+   このページに markup だけ残っている企業向けナビ（非表示）のみ。
+   将来そのナビを出す場合にそのまま効くよう残している。 */
 function setView(v){
   if(v === 'A'){ window.location.href = 'kigyo.html'; return; }
   if(v === 'B'){ window.location.href = 'kigyo.html?view=B'; return; }

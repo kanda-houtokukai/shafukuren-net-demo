@@ -148,7 +148,6 @@ function pickNeed(key, idx, btn){
 /* ========== 画面切替 ========== */
 function setView(v){
   document.body.dataset.view = v;
-  ['A','B'].forEach(k=>{ document.getElementById('btn'+k).classList.toggle('active', v===k); });
   const g=document.getElementById('navGuide'), l=document.getElementById('navList');
   if(g&&l){g.classList.toggle('now', v==='A'); l.classList.toggle('now', v==='B');}
   window.scrollTo({top:0});
