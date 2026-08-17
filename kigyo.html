@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>社福連ネット（仮称）レイアウト検討モック v5</title>
+<link rel="stylesheet" href="css/renkei.css">
+<link rel="stylesheet" href="css/trial.css">
+</head>
+<body data-view="A">
+
+<div class="mocktool">
+  <span class="label">レイアウト検討モック v5</span>
+  <span class="grp">企業の社員向け：</span>
+  <button id="btnA" class="active" onclick="setView('A')">案A 道案内</button>
+  <button id="btnB" onclick="setView('B')">案B 一覧</button>
+  <span class="grp">登録法人向け：</span>
+  <button id="btnC" onclick="setView('C')">空き状況の更新画面</button>
+</div>
+
+<div class="trialband">これは試作（デモ）です。掲載している法人名・施設名・空き状況・電話番号はすべて架空のものです。本番では登録いただいた企業・法人のみがログインして利用します。</div>
+
+<div class="loginbar corp">
+  <span>株式会社サンプル製作所 さま（協定企業専用ページ）</span>
+  <span>閲覧内容が勤務先に共有されることはありません</span>
+</div>
+<div class="loginbar houjin">
+  <span>社会福祉法人 サンプル会 さま（登録法人用）</span>
+  <span>更新した内容は、すぐに企業向けページに反映されます</span>
+</div>
+
+<header>
+  <div class="sitehead">
+    <div class="brand">
+      <div class="mark">
+        <svg viewBox="0 0 24 24" fill="none"><path d="M4 11.5 12 5l8 6.5" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M6.5 10.5V19h11v-8.5" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M12 19v-4" stroke="#fff" stroke-width="2" stroke-linecap="round"/></svg>
+      </div>
+      <div>
+        <span class="name">社福連ネット</span>
+        <span class="sub">福智町社会福祉法人連携協議会（サービス名は仮）</span>
+      </div>
+    </div>
+    <nav class="gnav corp">
+      <a href="#" class="now" id="navGuide">はじめての方へ</a>
+      <a href="#" id="navList">空き状況を見る</a>
+      <a href="#">事務局に相談</a>
+      <a href="#">お知らせ</a>
+    </nav>
+    <nav class="gnav houjin">
+      <a href="#" class="now">空き状況の更新</a>
+      <a href="#">施設情報</a>
+      <a href="#">お知らせ</a>
+    </nav>
+  </div>
+</header>
+
+<!-- ============ 案A ============ -->
+<div class="viewA">
+  <div class="wrap">
+
+    <p class="about">
+      <span class="pill">社福連ネットとは</span>
+      <span>福智町の社会福祉法人がつながって運営する、協定企業の社員の方のための情報・相談サービスです。掲載しているのは協議会に加入する法人の施設で、介護のこともお子さまのことも、ここから相談を始められます。</span>
+    </p>
+
+    <section class="heroA">
+      <h1>ご家族のことで困ったら、<span class="hl">まずここから。</span></h1>
+      <p class="lead">制度の名前を知らなくても大丈夫です。どなたのことでお困りかを選ぶと、困りごとに合うサービスの候補と、利用までの流れをご案内します。</p>
+      <div class="doors" id="doors">
+        <button class="door elder" id="door-elder" onclick="openField('elder')">
+          <span class="tag">高齢のご家族の介護</span>
+          <span class="ttl">介護が必要に<br>なってきた</span>
+          <span class="ex">退院後の生活が心配、日中ひとりにできない…など</span>
+          <span class="go">くわしく見る →</span>
+        </button>
+        <button class="door kids" id="door-kids" onclick="openField('kids')">
+          <span class="soon">今後拡大予定</span>
+          <span class="tag">お子さまのこと</span>
+          <span class="ttl">預け先をさがす・<br>発達が気になる</span>
+          <span class="ex">保育園・こども園、療育、放課後の居場所…など</span>
+          <span class="go">くわしく見る →</span>
+        </button>
+        <button class="door adult" id="door-adult" onclick="openField('adult')">
+          <span class="soon">今後拡大予定</span>
+          <span class="tag">障がいのあるおとなのご家族</span>
+          <span class="ttl">日中の居場所・<br>働く場・住まい</span>
+          <span class="ex">就労支援、グループホーム、短期の預かり…など</span>
+          <span class="go">くわしく見る →</span>
+        </button>
+      </div>
+      <div class="quicklink">
+        <a href="#" onclick="setView('B');return false;">サービスのことは知っている方はこちら｜空き状況の一覧へ →</a>
+      </div>
+    </section>
+
+    <section class="fieldpage" id="f-elder" style="--fc:var(--elder); --fcs:var(--elder-soft)"></section>
+    <section class="fieldpage" id="f-kids" style="--fc:var(--kids); --fcs:var(--kids-soft)"></section>
+    <section class="fieldpage" id="f-adult" style="--fc:var(--adult); --fcs:var(--adult-soft)"></section>
+
+    <section class="consult">
+      <div class="avatar">
+        <svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="9" r="4" stroke="#1f7f70" stroke-width="1.8"/><path d="M5 20c1.2-3.2 3.9-5 7-5s5.8 1.8 7 5" stroke="#1f7f70" stroke-width="1.8" stroke-linecap="round"/></svg>
+      </div>
+      <div class="bubble">
+        <div class="txt">
+          <h2>どれか分からなくても大丈夫。事務局が一緒に考えます。</h2>
+          <p>介護BtoB協定により、協定企業の社員の方は福祉のプロに無料で相談できます。施設のご紹介や見学の調整も事務局が行います。</p>
+        </div>
+        <div class="acts">
+          <span class="tel">0947-00-0000<small>平日 9:00〜17:00（社福連事務局）</small></span>
+          <a class="btn" href="#">相談フォームへ</a>
+        </div>
+      </div>
+    </section>
+  </div>
+</div>
+
+<!-- ============ 案B ============ -->
+<div class="viewB">
+  <div class="wrap">
+    <p class="about">
+      <span class="pill">社福連ネットとは</span>
+      <span>福智町の社会福祉法人がつながって運営する、協定企業の社員の方のためのサービスです。掲載しているのは協議会に加入する法人の施設です。</span>
+    </p>
+    <section class="listhead">
+      <h1>会員施設の<span class="hl">空き状況</span></h1>
+      <p>各施設が入力した最新の受け入れ状況です。表示はサービスごとの残り枠です。</p>
+      <p class="notice"><span>※</span><span>空きがあっても、利用開始には認定や申請などの手続きが必要です。はじめての方は<a href="#" onclick="setView('A');return false;">利用までの流れ</a>をご覧いただくか、事務局（0947-00-0000）にご相談ください。</span></p>
+    </section>
+
+    <div class="filters">
+      <div class="chips">
+        <button class="chip on" data-f="all">すべて</button>
+        <button class="chip" data-f="elder">高齢者の介護</button>
+        <button class="chip" data-f="kids">お子さま（発達支援）</button>
+        <button class="chip" data-f="adult">おとなの障がい支援</button>
+        <button class="chip" data-f="hoiku">保育園・こども園</button>
+      </div>
+      <span class="helpline">迷ったら：事務局 0947-00-0000</span>
+    </div>
+
+    <div class="cards" id="cardArea"></div>
+  </div>
+</div>
+
+<div class="toast" id="toast">更新しました。企業向けページに反映されます</div>
+
+<footer>
+  <div class="inner">
+    <span class="fname">社福連ネット（サービス名は仮）｜福智町社会福祉法人連携協議会</span>
+    <span>本ページは介護BtoB協定を締結いただいた企業の社員の方専用です。掲載は協議会に加入する法人の施設のみで、空き状況は各施設の入力に基づくものです。利用をお約束するものではありません。</span>
+    <span>閲覧内容が勤務先に共有されることはありません。</span>
+  </div>
+</footer>
+
+<script src="js/kigyo.js"></script>
+</body>
+</html>

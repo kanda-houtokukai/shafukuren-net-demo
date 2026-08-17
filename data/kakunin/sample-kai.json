@@ -1,0 +1,127 @@
+{
+  "houjinId": "sample-kai",
+  "houjin": "社会福祉法人 サンプル会",
+  "estimate": "所要のめやす 10分",
+  "groups": [
+    {
+      "cat": "elder",
+      "title": "高齢のご家族の介護",
+      "sub": "企業向けページの「介護」の入口に表示されます。",
+      "cards": [
+        {
+          "id": "gh-hinata",
+          "name": "グループホームひなた",
+          "svtags": [
+            {"label": "認知症対応型共同生活介護"},
+            {"label": "認知症の方が少人数で暮らす住まい", "plain": true}
+          ],
+          "rows": [
+            {"k": "所在地", "v": "福智町 金田地区", "chk": true},
+            {"k": "対象", "v": "要支援2・要介護1〜5の認定があり、医師の認知症の診断がある方", "src": {"label": "法人HP", "url": null, "retrievedAt": null}},
+            {"k": "受入地域", "v": "福智町および近隣の市町村にお住まいの方", "src": {"label": "法人HP", "url": null, "retrievedAt": null}},
+            {"k": "定員", "v": "未記入 — ご入力ください", "blank": true}
+          ],
+          "slots": {"label": "いまの空き", "unit": "残り室数"},
+          "note": "お問い合わせ先の電話番号は、確定後に事務局が転記します。"
+        }
+      ]
+    },
+    {
+      "cat": "adult",
+      "title": "障がいのあるおとなのご家族",
+      "sub": "日中の居場所・働く場・住まい・短期の預かりとして表示されます。",
+      "cards": [
+        {
+          "id": "sample-no-oka",
+          "name": "障がい者支援施設 サンプルの丘",
+          "svtags": [
+            {"label": "生活介護"},
+            {"label": "施設入所支援", "chk": true},
+            {"label": "短期入所"},
+            {"label": "日中の活動と、夜間も支援のある住まい", "plain": true}
+          ],
+          "rows": [
+            {"k": "所在地", "v": "福智町 上野1234-5", "src": {"label": "法人HP", "url": null, "retrievedAt": null}},
+            {"k": "日中活動", "v": "健康づくり・創作活動・生産活動", "src": {"label": "法人HP", "url": null, "retrievedAt": null}},
+            {"k": "利用に必要", "v": "障害福祉サービス受給者証", "src": {"label": "法人HP", "url": null, "retrievedAt": null}},
+            {"k": "定員", "v": "未記入 — サービスごとにご入力ください", "blank": true},
+            {"k": "見学", "v": "事前連絡で施設内を案内", "src": {"label": "法人HP", "url": null, "retrievedAt": null}},
+            {"k": "送迎", "v": "未確認 — 有無をお教えください", "blank": true}
+          ],
+          "slots": {"label": "いまの空き（生活介護）", "unit": "残り枠"},
+          "note": "短期入所・入所支援の空きは、確定後に別枠でご入力いただきます。"
+        },
+        {
+          "id": "work-center-sample",
+          "name": "ワークセンターサンプル",
+          "svtags": [
+            {"label": "就労継続支援B型"},
+            {"label": "自分のペースで働く場", "plain": true}
+          ],
+          "rows": [
+            {"k": "所在地", "v": "福智町 神崎987-6", "src": {"label": "法人HP", "url": null, "retrievedAt": null}},
+            {"k": "作業内容", "v": "焼き菓子の製造・受注作業など", "src": {"label": "法人HP", "url": null, "retrievedAt": null}, "chk": true},
+            {"k": "定員", "v": "未記入 — ご入力ください", "blank": true},
+            {"k": "工賃のめやす", "v": "未記入 — 掲載可否も含めご判断ください", "blank": true}
+          ],
+          "slots": {"label": "いまの空き", "unit": "残り枠"},
+          "note": "「多機能型」の場合、B型以外の指定があればお教えください。"
+        }
+      ]
+    },
+    {
+      "cat": "kids",
+      "title": "お子さまのこと",
+      "sub": "預け先・発達・障がいのお子さまの入口に表示されます。",
+      "cards": [
+        {
+          "id": "hoshizora-center",
+          "name": "児童発達支援センター ほしぞら",
+          "svtags": [
+            {"label": "児童発達支援"},
+            {"label": "放課後等デイサービス", "chk": true},
+            {"label": "未就学・就学中のお子さんの療育", "plain": true}
+          ],
+          "rows": [
+            {"k": "所在地", "v": "福智町 赤池111-1（サンプル駅前）", "src": {"label": "法人HP", "url": null, "retrievedAt": null}},
+            {"k": "送迎", "v": "希望者は要相談", "src": {"label": "法人HP", "url": null, "retrievedAt": null}},
+            {"k": "費用", "v": "受給者証の上限額の範囲内＋実費（食事・おやつ・教材費）", "src": {"label": "法人HP", "url": null, "retrievedAt": null}},
+            {"k": "定員", "v": "未記入 — サービスごとにご入力ください", "blank": true},
+            {"k": "土曜利用", "v": "未確認 — 可否をお教えください", "blank": true}
+          ],
+          "slots": {"label": "いまの空き（児童発達支援）", "unit": "残り枠"},
+          "note": "保護者の方が最初に見る施設になりやすいため、説明文は特に丁寧に整えます。"
+        }
+      ]
+    },
+    {
+      "cat": "sodan",
+      "title": "相談できる窓口",
+      "sub": "空き枠の入力は不要です。「どこに相談すればいいか分からない」方への案内先として表示します。",
+      "cards": [
+        {
+          "id": "nozomi-sodan",
+          "name": "サンプル相談支援事業所 のぞみ",
+          "svtags": [
+            {"label": "相談支援"},
+            {"label": "障がいのある方の相談窓口", "plain": true}
+          ],
+          "rows": [
+            {"k": "のぞみ", "v": "障がいのある方が地域で安心して暮らすための相談窓口", "src": {"label": "法人HP", "url": null, "retrievedAt": null}},
+            {"k": "相談できる方", "v": "未確認 — 対象地域・対象者をお教えください", "blank": true}
+          ],
+          "slots": null,
+          "note": "どんな相談ができる窓口かの一言があると、企業の方が迷わず選べます。"
+        }
+      ]
+    }
+  ],
+  "excluded": {
+    "title": "掲載対象から外した事業所",
+    "items": [
+      {"name": "サンプル発電所", "reason": "障がい者雇用事業のため、家族が利用する施設ではないと判断しました"},
+      {"name": "本部事務所", "reason": "事業所ではないため"}
+    ],
+    "note": "この判断でよいか、また下書きに漏れている事業所がないか、あわせてご確認ください。"
+  }
+}

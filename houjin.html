@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>社福連ネット（仮称）レイアウト検討モック v5</title>
+<link rel="stylesheet" href="css/renkei.css">
+<link rel="stylesheet" href="css/trial.css">
+</head>
+<body data-view="C">
+
+<div class="mocktool">
+  <span class="label">レイアウト検討モック v5</span>
+  <span class="grp">企業の社員向け：</span>
+  <button id="btnA" onclick="setView('A')">案A 道案内</button>
+  <button id="btnB" onclick="setView('B')">案B 一覧</button>
+  <span class="grp">登録法人向け：</span>
+  <button id="btnC" class="active" onclick="setView('C')">空き状況の更新画面</button>
+</div>
+
+<div class="trialband">これは試作（デモ）です。掲載している法人名・施設名・空き状況・電話番号はすべて架空のものです。本番では登録いただいた企業・法人のみがログインして利用します。</div>
+
+<div class="loginbar corp">
+  <span>株式会社サンプル製作所 さま（協定企業専用ページ）</span>
+  <span>閲覧内容が勤務先に共有されることはありません</span>
+</div>
+<div class="loginbar houjin">
+  <span>社会福祉法人 サンプル会 さま（登録法人用）</span>
+  <span>更新した内容は、すぐに企業向けページに反映されます</span>
+</div>
+
+<header>
+  <div class="sitehead">
+    <div class="brand">
+      <div class="mark">
+        <svg viewBox="0 0 24 24" fill="none"><path d="M4 11.5 12 5l8 6.5" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M6.5 10.5V19h11v-8.5" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M12 19v-4" stroke="#fff" stroke-width="2" stroke-linecap="round"/></svg>
+      </div>
+      <div>
+        <span class="name">社福連ネット</span>
+        <span class="sub">福智町社会福祉法人連携協議会（サービス名は仮）</span>
+      </div>
+    </div>
+    <nav class="gnav corp">
+      <a href="#" class="now" id="navGuide">はじめての方へ</a>
+      <a href="#" id="navList">空き状況を見る</a>
+      <a href="#">事務局に相談</a>
+      <a href="#">お知らせ</a>
+    </nav>
+    <nav class="gnav houjin">
+      <a href="#" class="now">空き状況の更新</a>
+      <a href="#">施設情報</a>
+      <a href="#">お知らせ</a>
+    </nav>
+  </div>
+</header>
+
+<!-- ============ 案C ============ -->
+<div class="viewC">
+  <div class="wrap">
+    <section class="adminhead">
+      <h1>空き状況の<span class="hl">更新</span></h1>
+      <p>数を合わせて更新ボタンを押すだけです。変わっていないときも「変化なし」を押すと更新日が新しくなり、企業の方に安心して見ていただけます。</p>
+      <span class="remind">
+        <svg viewBox="0 0 24 24" fill="none"><path d="M6 10a6 6 0 0 1 12 0c0 4 1.5 5.5 2 6H4c.5-.5 2-2 2-6z" stroke="#9a6a1f" stroke-width="1.7" stroke-linejoin="round"/><path d="M10 19a2 2 0 0 0 4 0" stroke="#9a6a1f" stroke-width="1.7" stroke-linecap="round"/></svg>
+        毎月1日に更新のお願いメールが届きます
+      </span>
+    </section>
+
+    <div id="svcArea"></div>
+
+    <p class="adminnote">受け入れの細かい条件（対象・送迎・曜日など）を変えたいときは、上の「施設情報」から編集できます。空き枠の入力はこのページだけで完結します。</p>
+  </div>
+</div>
+
+<div class="toast" id="toast">更新しました。企業向けページに反映されます</div>
+
+<footer>
+  <div class="inner">
+    <span class="fname">社福連ネット（サービス名は仮）｜福智町社会福祉法人連携協議会</span>
+    <span>本ページは介護BtoB協定を締結いただいた企業の社員の方専用です。掲載は協議会に加入する法人の施設のみで、空き状況は各施設の入力に基づくものです。利用をお約束するものではありません。</span>
+    <span>閲覧内容が勤務先に共有されることはありません。</span>
+  </div>
+</footer>
+
+<script src="js/houjin.js"></script>
+</body>
+</html>
