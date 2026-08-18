@@ -6,10 +6,11 @@
 <title>社福連ネット（仮称）レイアウト検討モック v5</title>
 <link rel="stylesheet" href="css/renkei.css">
 <link rel="stylesheet" href="css/trial.css">
+<link rel="stylesheet" href="css/mobile.css">
 </head>
 <body data-view="A">
 
-<div class="trialband">これは試作（デモ）です。掲載している法人名・施設名・空き状況・電話番号はすべて架空のものです。本番では登録いただいた企業・法人のみがログインして利用します。</div>
+<div class="trialband" id="trialband"><span class="tb-short">これは試作（デモ）です。データはすべて架空です。</span><span class="tb-full">これは試作（デモ）です。掲載している法人名・施設名・空き状況・電話番号はすべて架空のものです。本番では登録いただいた企業・法人のみがログインして利用します。</span><button class="tb-more" id="tbMore" type="button">くわしく</button></div>
 
 <div class="loginbar corp">
   <span>株式会社サンプル製作所 さま（協定企業専用ページ）</span>
@@ -66,14 +67,12 @@
           <span class="go">くわしく見る →</span>
         </button>
         <button class="door kids" id="door-kids" onclick="openField('kids')">
-          <span class="soon">今後拡大予定</span>
           <span class="tag">お子さまのこと</span>
           <span class="ttl">預け先をさがす・<br>発達が気になる</span>
           <span class="ex">保育園・こども園、療育、放課後の居場所…など</span>
           <span class="go">くわしく見る →</span>
         </button>
         <button class="door adult" id="door-adult" onclick="openField('adult')">
-          <span class="soon">今後拡大予定</span>
           <span class="tag">障がいのあるおとなのご家族</span>
           <span class="ttl">日中の居場所・<br>働く場・住まい</span>
           <span class="ex">就労支援、グループホーム、短期の預かり…など</span>
@@ -122,16 +121,22 @@
 
     <div class="filters">
       <div class="chips">
-        <button class="chip on" data-f="all">すべて</button>
-        <button class="chip" data-f="elder">高齢者の介護</button>
-        <button class="chip" data-f="kids">お子さま（発達支援）</button>
-        <button class="chip" data-f="adult">おとなの障がい支援</button>
-        <button class="chip" data-f="hoiku">保育園・こども園</button>
+        <button class="chip catchip on" data-f="all">すべて</button>
+        <button class="chip catchip" data-f="elder">高齢者の介護</button>
+        <button class="chip catchip" data-f="kids">お子さま（発達支援）</button>
+        <button class="chip catchip" data-f="adult">おとなの障がい支援</button>
+        <button class="chip catchip" data-f="hoiku">保育園・こども園</button>
       </div>
       <span class="helpline">迷ったら：事務局 0947-00-0000</span>
     </div>
 
+    <div class="svcfilter">
+      <span class="svclabel">サービスの種類でさらに絞る</span>
+      <div class="chips svcchips" id="svcChips"></div>
+    </div>
+
     <div class="cards" id="cardArea"></div>
+    <p class="noresult" id="noresult">この条件に当てはまる事業所は、まだ登録されていません。事務局（0947-00-0000）にお尋ねいただくか、条件を「すべて」に戻してご覧ください。</p>
   </div>
 </div>
 
@@ -147,5 +152,6 @@
 </footer>
 
 <script src="js/kigyo.js"></script>
+<script src="js/trialband.js"></script>
 </body>
 </html>

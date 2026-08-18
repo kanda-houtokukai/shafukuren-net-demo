@@ -1,0 +1,148 @@
+/* 社福連ネット スマートフォン幅（780px以下）だけの調整。
+   ─ PC幅（781px以上）の見え方には一切影響させない
+   ─ モックから抽出した renkei.css / kakunin.css には手を入れず、上書きはここに書く
+   ─ 変えるのは「並べ方と大きさ」だけ。文言・情報の内容は変えない
+   読み込み順の都合で、このファイルは各ページの最後に読み込む */
+
+/* ===== 試作帯：PC幅では全文を出す（短縮版と「くわしく」は隠す） ===== */
+.trialband .tb-short,
+.trialband .tb-more{display:none;}
+
+@media(max-width:780px){
+
+  /* ===== 26. 試作帯：1行に短縮し、残りはタップで開く ===== */
+  .trialband{
+    text-align:left; font-size:11.5px; line-height:1.55;
+    padding:8px 12px;
+    display:flex; align-items:center; gap:6px;
+  }
+  .trialband .tb-short{flex:1; min-width:0;}
+  .trialband .tb-short{display:inline;}
+  .trialband .tb-full{display:none;}
+  .trialband.open .tb-short{display:none;}
+  .trialband.open .tb-full{display:inline;}
+  .trialband .tb-more{
+    display:inline-block; flex:0 0 auto;
+    border:1px solid #e0cd93; background:#fff8e2; color:#8a6a20;
+    border-radius:999px; padding:3px 10px; font-size:11px; font-weight:bold;
+    cursor:pointer; white-space:nowrap;
+  }
+  .trialband.open{display:block;}
+  .trialband.open .tb-more{margin-left:6px;}
+
+  /* ===== 25. 入口カード：横長の低いカードにして3枚を一望できるように ===== */
+  .doors{grid-template-columns:1fr; gap:10px; margin:20px 0 4px;}
+  .door{
+    min-height:0; padding:14px 40px 14px 16px; gap:3px;
+    border-radius:16px;
+  }
+  .door::before{width:74px; height:74px; top:-24px; right:-24px;}
+  .door .tag{font-size:11px;}
+  .door .ttl{font-size:15.5px; line-height:1.4;}
+  .door .ttl br{display:none;}          /* PC用の改行はスマホでは邪魔になる */
+  .door .ex{font-size:11.5px; line-height:1.55;}
+  .door .go{display:none;}              /* カード全体がボタンのため省く */
+  .door::after{                          /* タップできることが分かる矢印 */
+    content:"›"; position:absolute; right:16px; top:50%; transform:translateY(-50%);
+    font-size:24px; line-height:1; color:#c9c6bc;
+  }
+  .quicklink{margin:12px 0 26px;}
+  .quicklink a{font-size:12.5px;}
+
+  /* ===== 28. 分野ページの現在地バナー：分野名だけの1行に ===== */
+  .fieldbanner{
+    padding:11px 14px; border-radius:14px; gap:10px;
+    margin-bottom:18px; align-items:center;
+  }
+  .fieldbanner .bicon{display:none;}
+  .fieldbanner .bnow{display:none;}
+  .fieldbanner .btxt{min-width:0;}
+  .fieldbanner h2{font-size:14.5px; line-height:1.45;}
+  .fieldbanner h2 .btitle{display:none;}   /* 副題はPCのみ。スマホは分野名だけ */
+  .fieldbanner .back{font-size:11.5px;}
+  .anon{margin:0 0 20px 2px; font-size:11.5px;}
+
+  /* ===== 27. 困りごとチップ：2列のグリッドに ===== */
+  .needs{
+    display:grid; grid-template-columns:1fr 1fr;
+    gap:8px; align-items:stretch; margin-bottom:14px;
+  }
+  .needgrp{grid-column:1 / -1; width:auto; margin:6px 0 -2px;}
+  .needs .needgrp:first-child{margin-top:0;}
+  .need{
+    padding:11px 12px; font-size:12.5px; line-height:1.45;
+    text-align:center; display:flex; align-items:center; justify-content:center;
+  }
+
+  /* ===== 24. 利用までの流れ：左に小さな丸、右に本文の行型に ===== */
+  .jsteps{grid-template-columns:1fr; gap:0; margin-top:14px;}
+  .jstep{
+    display:grid; grid-template-columns:56px 1fr; column-gap:14px;
+    grid-auto-rows:min-content;
+    text-align:left; padding:0 0 20px;
+  }
+  .jstep > *{grid-column:2;}
+  .jstep .medal{
+    grid-column:1; grid-row:1 / span 20; align-self:start;
+    width:56px; height:56px; margin:0; border-width:2px;
+  }
+  .jstep .medal svg{width:26px; height:26px;}
+  .jstep .medal .nbadge{
+    width:23px; height:23px; font-size:12px; top:-5px; left:-5px;
+  }
+  .jstep .start-chip{                       /* STARTは残す（位置だけ変える） */
+    position:static; transform:none; justify-self:start;
+    margin:0 0 5px; font-size:10px;
+  }
+  .jstep h3{font-size:14.5px; line-height:1.45;}
+  .jstep p{margin-top:4px; font-size:12.5px; line-height:1.6;}
+  .jstep .free,.jstep .dur{margin-top:6px; font-size:11px;}
+  .jstep .subnote{margin-top:6px; font-size:11px;}
+  /* 丸と丸を細い縦線でつなぐ（PCの「▼」に代わるもの） */
+  .jstep:not(:last-child)::after{
+    content:""; position:absolute;
+    left:27px; top:62px; bottom:4px; right:auto;
+    width:2px; background:#e4e1d7; border-radius:1px;
+    transform:none; font-size:0; color:transparent;
+  }
+  .flowtabs{gap:6px; margin-bottom:14px;}
+  .flowtabs .flowtab{font-size:12px; padding:7px 14px;}
+
+  /* ===== よくある疑問：ジャンルタブが窮屈にならないよう横スクロールに ===== */
+  .faqgenres{
+    flex-wrap:nowrap; overflow-x:auto; padding-bottom:4px;
+    -webkit-overflow-scrolling:touch; scrollbar-width:none;
+  }
+  .faqgenres::-webkit-scrollbar{display:none;}
+  .faqgenres .flowtab{flex:0 0 auto;}
+  .faq summary{font-size:13px; padding:13px 0; gap:9px;}
+  .faq .a{font-size:12.5px; padding-left:34px;}
+
+  /* ===== 一覧のフィルタ：分野は折り返し、サービス種別は横スクロール ===== */
+  .filters{margin:16px 0 12px; gap:10px;}
+  .filters .chips{gap:6px;}
+  .filters .chip{font-size:12.5px; padding:8px 14px;}
+  .filters .helpline{font-size:11.5px;}
+  .svcfilter{
+    display:block; margin:0 0 18px;
+  }
+  .svcfilter .svclabel{display:block; margin-bottom:6px; font-size:11.5px;}
+  .chips.svcchips{
+    flex-wrap:nowrap; overflow-x:auto; padding-bottom:4px;
+    -webkit-overflow-scrolling:touch; scrollbar-width:none;
+  }
+  .chips.svcchips::-webkit-scrollbar{display:none;}
+  .chips.svcchips .chip{flex:0 0 auto;}
+
+  /* ===== 見出し・余白の詰め（間延びの解消） ===== */
+  .secttl{margin:26px 0 3px; font-size:15px;}
+  .secsub{font-size:12px; margin-bottom:12px;}
+  .about{margin:18px 0 4px; font-size:12.5px;}
+  .heroA{padding:18px 0 4px;}
+  .heroA p.lead{font-size:13.5px; margin-top:8px;}
+  .jgoal{margin-top:26px; gap:12px;}
+  .jgoal .msg{font-size:13px;}
+  .consult{margin:4px 0 40px;}
+  .listhead{padding:20px 0 0;}
+  .cards{gap:12px; margin-bottom:34px;}
+}

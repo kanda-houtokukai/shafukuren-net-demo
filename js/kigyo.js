@@ -4,6 +4,8 @@
 
 let SVC = {};
 let FIELDS = {};
+let GENRES = [];
+let ROWS = [];
 
 const ICONS = {
   chat:'<path d="M4 6.5A2.5 2.5 0 0 1 6.5 4h11A2.5 2.5 0 0 1 20 6.5v7a2.5 2.5 0 0 1-2.5 2.5H10l-4.2 3.4c-.5.4-1.3 0-1.3-.6V6.5z" stroke="CLR" stroke-width="1.7" stroke-linejoin="round"/><circle cx="8.6" cy="10" r="1.1" fill="CLR"/><circle cx="12" cy="10" r="1.1" fill="CLR"/><circle cx="15.4" cy="10" r="1.1" fill="CLR"/>',
@@ -34,7 +36,8 @@ function buildField(key){
   const F = FIELDS[key];
   let h = '';
   h += '<div class="fieldbanner"><div class="bicon">' + F.icon + '</div>';
-  h += '<div class="btxt"><div class="bnow">いま見ているページ</div><h2>' + F.banner + '：' + F.title + '</h2></div>';
+  /* 分野名と副題を分けて包む（PCは続けて表示され見た目は同じ／スマホは副題を隠して1行にする） */
+  h += '<div class="btxt"><div class="bnow">いま見ているページ</div><h2><span class="bname">' + F.banner + '</span><span class="btitle">：' + F.title + '</span></h2></div>';
   h += '<a class="back" onclick="backToDoors()">← 入口にもどる</a></div>';
   h += '<p class="anon">ここで調べたことが勤務先や施設に伝わることはありません。匿名での相談もできます。</p>';
 
@@ -57,11 +60,15 @@ function buildField(key){
   }
   h += '<div id="flow-' + key + '">' + stepsHtml(key, F.flows[0].steps) + '</div>';
 
-  h += '<h3 class="secttl">よくある疑問</h3><div class="faq" id="faq-' + key + '">';
-  F.faq.forEach(f=>{
-    h += '<details><summary><span class="q">Q</span>' + f.q + '<span class="arw">▶</span></summary><div class="a">' + f.a + '</div></details>';
+  h += '<h3 class="secttl">よくある疑問</h3>';
+  h += '<p class="secsub">知りたいことの種類を選ぶと、その質問だけが並びます。</p>';
+  const gs = genresOf(key);
+  h += '<div class="flowtabs faqgenres" id="faqg-' + key + '">';
+  gs.forEach((g,i)=>{
+    h += '<button class="flowtab' + (i===0?' on':'') + '" onclick="pickGenre(\'' + key + '\',\'' + g.id + '\',this)">' + g.label + '</button>';
   });
   h += '</div>';
+  h += '<div class="faq" id="faq-' + key + '"></div>';
 
   h += '<div class="jgoal"><div class="flag"><svg viewBox="0 0 24 24" fill="none"><path d="M6 21V4" stroke="#8a6a20" stroke-width="2" stroke-linecap="round"/><path d="M6 5h11l-2.5 3.5L17 12H6" stroke="#8a6a20" stroke-width="2" stroke-linejoin="round" fill="#fff"/></svg></div>';
   h += '<div class="msg">受け入れ状況をのぞいてみましょう。<small>空きがあっても利用開始には手続きが必要です。</small></div>';
@@ -70,14 +77,37 @@ function buildField(key){
   const el = document.getElementById('f-' + key);
   el.innerHTML = h;
 
-  /* よくある疑問：ひとつ開くと他は閉じる */
-  el.querySelectorAll('#faq-' + key + ' details').forEach(d=>{
+  /* 最初のジャンルの質問を出しておく */
+  if(gs.length) renderFaq(key, gs[0].id);
+}
+
+/* ========== よくある疑問（ジャンル → 質問の二段構え） ========== */
+function genresOf(key){
+  /* その分野に質問があるジャンルだけを、master の並び順で返す */
+  const faq = FIELDS[key].faq;
+  return GENRES.filter(g=>faq.some(f=>f.genre === g.id));
+}
+function renderFaq(key, genreId){
+  const box = document.getElementById('faq-' + key);
+  const list = FIELDS[key].faq.filter(f=>f.genre === genreId);
+  let h = '';
+  list.forEach(f=>{
+    h += '<details><summary><span class="q">Q</span>' + f.q + '<span class="arw">▶</span></summary><div class="a">' + f.a + '</div></details>';
+  });
+  box.innerHTML = h;
+  /* ひとつ開くと他は閉じる（ジャンルを切り替えるたびに結び直す） */
+  box.querySelectorAll('details').forEach(d=>{
     d.addEventListener('toggle', ()=>{
       if(d.open){
-        el.querySelectorAll('#faq-' + key + ' details').forEach(o=>{ if(o!==d) o.open=false; });
+        box.querySelectorAll('details').forEach(o=>{ if(o!==d) o.open=false; });
       }
     });
   });
+}
+function pickGenre(key, genreId, btn){
+  document.querySelectorAll('#faqg-' + key + ' .flowtab').forEach(b=>b.classList.remove('on'));
+  btn.classList.add('on');
+  renderFaq(key, genreId);
 }
 
 /* ========== 更新日の表示と警告判定（updatedAt から機械判定） ========== */
@@ -91,20 +121,26 @@ function isOld(iso){
   return (Date.now() - dt.getTime()) > 30*24*60*60*1000; /* 1か月超＝30日超 */
 }
 
-/* ========== 案B 施設カードの生成 ========== */
-function buildCards(list){
+/* ========== 案B 施設カードの生成（1枚＝事業所×サービス種別） ========== */
+function buildCards(rows){
   const area = document.getElementById('cardArea');
+  /* 同一事業所の他サービスを添えるため、事業所ごとにまとめておく */
+  const byOffice = {};
+  rows.forEach(r=>{ (byOffice[r.officeId] = byOffice[r.officeId] || []).push(r); });
+
   let h = '';
-  list.forEach(c=>{
-    h += '<div class="card" data-cat="' + c.cat + '">';
+  rows.forEach(c=>{
+    const others = byOffice[c.officeId].filter(o=>o.id !== c.id);
+    h += '<div class="card" data-cat="' + c.cat + '" data-svc="' + c.svcCode + '" data-office="' + c.officeId + '">';
     h += '<div class="top">';
-    h += '<div><div class="fname">' + c.name + '</div><div class="corp">' + c.corp + '</div></div>';
+    h += '<div><div class="fname">' + c.office + '</div><div class="corp">' + c.corp + '</div></div>';
     h += '<div class="avail ' + c.avail.level + '"><div class="mk">' + c.avail.mark + '</div><div class="tx">' + c.avail.text + '</div></div>';
     h += '</div>';
-    h += '<div class="tags">';
-    c.tags.forEach(t=>{ h += '<span class="tag2 ' + t.type + '">' + t.label + '</span>'; });
-    h += '</div>';
+    h += '<div class="tags"><span class="tag2 ' + c.cat + '">' + c.svcLabel + '</span><span class="tag2 plain">' + c.svcPlain + '</span></div>';
     h += '<div class="meta">' + c.meta + '</div>';
+    if(others.length){
+      h += '<div class="samesvc">▸ 同じ事業所の他のサービス：' + others.map(o=>o.svcLabel).join('・') + '</div>';
+    }
     h += '<div class="foot">';
     const old = isOld(c.updatedAt);
     h += '<span class="updated' + (old ? ' old' : '') + '">' + fmtMD(c.updatedAt) + ' 更新' + (old ? '（情報が古い可能性があります）' : '') + '</span>';
@@ -113,6 +149,24 @@ function buildCards(list){
     h += '</div>';
   });
   area.innerHTML = h;
+}
+
+/* ========== 二段目のフィルタ（サービス種別）を、選んだ分野に合わせて作り直す ========== */
+function buildSvcChips(cat, selected){
+  const box = document.getElementById('svcChips');
+  if(!box) return;
+  /* その分野に実在するサービス種別だけを、辞典の並び順で出す */
+  const inCat = ROWS.filter(r=>cat==='all' || r.cat===cat);
+  const codes = Object.keys(SVC).filter(code=>inCat.some(r=>r.svcCode===code));
+  let h = '<button class="chip svcchip' + (selected==='all'?' on':'') + '" data-svc="all">すべてのサービス</button>';
+  codes.forEach(code=>{
+    const label = (inCat.find(r=>r.svcCode===code) || {}).svcLabel || SVC[code].name;
+    h += '<button class="chip svcchip' + (selected===code?' on':'') + '" data-svc="' + code + '">' + label + '</button>';
+  });
+  box.innerHTML = h;
+  box.querySelectorAll('.svcchip').forEach(ch=>{
+    ch.addEventListener('click', ()=>{ goList(currentCat, ch.dataset.svc); });
+  });
 }
 
 function pickFlow(key, idx, btn){
@@ -138,7 +192,7 @@ function pickNeed(key, idx, btn){
       h += '<div class="svcard"><div class="svhead"><span class="svname">' + s.name + '</span><span class="svplain">' + s.plain + '</span></div>';
       h += '<p class="svdesc">' + s.desc + '</p><p class="svex">' + s.ex + '</p>';
       h += '<div class="svfoot"><span class="svnote">候補のご紹介です。ぴったり合うかは事務局が一緒に確認します。</span>';
-      h += '<div class="svbtns"><button class="btn ghost" onclick="goList(\'' + s.cat + '\')">空きを見る</button><a class="btn" href="#">事務局に相談</a></div></div></div>';
+      h += '<div class="svbtns"><button class="btn ghost" onclick="goList(\'all\',\'' + id + '\')">空きを見る</button><a class="btn" href="#">事務局に相談</a></div></div></div>';
     });
   }
   out.innerHTML = h;
@@ -172,30 +226,54 @@ function backToDoors(){
   window.scrollTo({top:0, behavior:'smooth'});
 }
 
-function goList(cat){
+let currentCat = 'all';
+let currentSvc = 'all';
+
+function goList(cat, svc){
+  cat = cat || 'all';
+  svc = svc || 'all';
+  /* サービス種別だけを指定して呼ばれたときは、分野は「すべて」に戻す */
+  currentCat = cat; currentSvc = svc;
   setView('B');
-  document.querySelectorAll('.chip').forEach(c=>{
-    c.classList.toggle('on', c.dataset.f === cat || (cat==='all' && c.dataset.f==='all'));
+
+  /* 一段目：分野チップ */
+  document.querySelectorAll('.catchip').forEach(c=>{
+    c.classList.toggle('on', c.dataset.f === cat);
   });
+  /* 二段目：その分野にあるサービス種別を出し直す */
+  buildSvcChips(cat, svc);
+
+  /* 絞り込みの適用 */
+  let shown = 0;
   document.querySelectorAll('#cardArea .card').forEach(card=>{
-    card.style.display = (cat==='all' || card.dataset.cat===cat) ? '' : 'none';
+    const hit = (cat==='all' || card.dataset.cat===cat) && (svc==='all' || card.dataset.svc===svc);
+    card.style.display = hit ? '' : 'none';
+    if(hit) shown++;
   });
+  const none = document.getElementById('noresult');
+  if(none) none.style.display = shown ? 'none' : 'block';
 }
-document.querySelectorAll('.chip').forEach(ch=>{
-  ch.addEventListener('click', ()=>{ goList(ch.dataset.f); });
+
+/* 分野チップ：押すとサービス種別は「すべて」に戻す（分野だけで見る経路） */
+document.querySelectorAll('.catchip').forEach(ch=>{
+  ch.addEventListener('click', ()=>{ goList(ch.dataset.f, 'all'); });
 });
 
 /* ========== データ読み込みと初期化 ========== */
 (async function init(){
-  const [svc, fields, fac] = await Promise.all([
+  const [svc, fields, fac, genres] = await Promise.all([
     fetch('data/services.json').then(r=>r.json()),
     fetch('data/fields.json').then(r=>r.json()),
-    fetch('data/facilities.json').then(r=>r.json())
+    fetch('data/facilities.json').then(r=>r.json()),
+    fetch('data/faq-genres.json').then(r=>r.json())
   ]);
   SVC = svc;
   FIELDS = fields;
+  GENRES = genres.genres;
+  ROWS = fac.list;
   Object.keys(FIELDS).forEach(buildField);
-  buildCards(fac.list);
+  buildCards(ROWS);
+  buildSvcChips('all', 'all');
   /* houjin.html からの遷移時に案Bを直接開く */
   const v = new URLSearchParams(location.search).get('view');
   if(v === 'B') setView('B');
