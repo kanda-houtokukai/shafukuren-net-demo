@@ -2,10 +2,80 @@
 <html lang="ja">
 <head>
 <meta charset="UTF-8">
-<meta http-equiv="refresh" content="0; url=kigyo.html">
-<title>社福連ネット（仮称）</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>社福連ネット（仮称）｜ご案内</title>
+<style>
+  :root{
+    --ink:#3b3a35; --ink-soft:#7c786e; --primary:#2f8f7c; --primary-deep:#1f7f70;
+    --bg:#faf8f3; --line:#e9e5db; --shadow:0 6px 20px rgba(80,90,85,.08);
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0; background:var(--bg); color:var(--ink);
+    font-family:"Hiragino Kaku Gothic ProN","Yu Gothic",system-ui,sans-serif;
+    line-height:1.8; -webkit-text-size-adjust:100%;
+  }
+  .wrap{max-width:720px; margin:0 auto; padding:48px 22px 64px;}
+  header{display:flex; align-items:center; gap:12px; margin-bottom:34px;}
+  .mark{
+    width:44px; height:44px; border-radius:13px; background:var(--primary);
+    display:flex; align-items:center; justify-content:center; flex:0 0 44px;
+  }
+  .mark svg{width:22px; height:22px; fill:#fff;}
+  .ttl{font-size:19px; font-weight:800; letter-spacing:.02em;}
+  .sub{font-size:12px; color:var(--ink-soft); margin-top:2px;}
+  h1{font-size:23px; margin:0 0 18px; line-height:1.5;}
+  .card{
+    background:#fff; border-radius:18px; box-shadow:var(--shadow);
+    padding:26px 24px; margin:22px 0;
+  }
+  .card h2{font-size:16px; margin:0 0 10px;}
+  p{margin:0 0 14px;}
+  .note{font-size:13.5px; color:var(--ink-soft);}
+  .btn{
+    display:inline-block; background:var(--primary); color:#fff; text-decoration:none;
+    font-weight:bold; border-radius:999px; padding:13px 28px; margin-top:6px;
+    box-shadow:0 6px 16px rgba(47,143,124,.26);
+  }
+  .btn:hover{background:var(--primary-deep);}
+  .url{
+    font-size:13px; color:var(--ink-soft); margin-top:12px; word-break:break-all;
+  }
+  footer{margin-top:40px; font-size:12.5px; color:var(--ink-soft); border-top:1px solid var(--line); padding-top:18px;}
+  @media(max-width:600px){ .wrap{padding:32px 18px 48px;} h1{font-size:20px;} }
+</style>
 </head>
 <body>
-<p><a href="kigyo.html">企業向けページへ移動します（自動で切り替わらない場合はこちら）</a></p>
+<div class="wrap">
+  <header>
+    <div class="mark"><svg viewBox="0 0 24 24"><path d="M12 3 3 10v11h6v-6h6v6h6V10z"/></svg></div>
+    <div>
+      <div class="ttl">社福連ネット（仮称）</div>
+      <div class="sub">福智町社会福祉法人連携協議会</div>
+    </div>
+  </header>
+
+  <h1>この試作は、新しい場所に移りました。</h1>
+
+  <div class="card">
+    <h2>いまの試作はこちら</h2>
+    <p>空き状況の更新・掲載内容の確認・ご相談の受付までを、実際に操作して確かめていただけます。</p>
+    <p><a class="btn" href="https://shafukuren-demo.houtokukai.workers.dev">試作を開く</a></p>
+    <p class="url">https://shafukuren-demo.houtokukai.workers.dev</p>
+    <p class="note">ご覧いただくにはログインが必要です。IDとパスワードは事務局からお渡しします。</p>
+  </div>
+
+  <div class="card">
+    <h2>このページにあった古い画面について</h2>
+    <p>2026年8月時点の画面を置いていましたが、その後に作りが大きく変わりました。
+       内容が古く、いまの試作とは別物のため、取り下げています。</p>
+  </div>
+
+  <footer>
+    社福連ネット（仮称）｜福智町社会福祉法人連携協議会<br>
+    掲載している法人名・施設名はすべて架空のもので、実在の法人・事業所を表すものではありません。
+  </footer>
+</div>
 </body>
 </html>
